@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/scene_2_RobotFight.unity
+- path: Assets/Scenes/scene_6_SciFi.unity
   isLoaded: 1
   isActive: 1
