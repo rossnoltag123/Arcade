@@ -32,20 +32,16 @@ public class Player1Controller_RobotScene : MonoBehaviour {
         anim = GetComponent<Animator>();
 	}
 
-
-	
 	// Update is called once per frame
 	void Update () {
-
-
-
 
         isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, whatIsGround);
 
         if (Input.GetKey(left))
         {
             theRB.velocity = new Vector2(-moveSpeed, theRB.velocity.y);
-        }else if (Input.GetKey(right))
+        }
+        else if (Input.GetKey(right))
         {
             theRB.velocity = new Vector2(moveSpeed, theRB.velocity.y);
         }
