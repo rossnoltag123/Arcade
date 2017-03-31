@@ -1,29 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player1Controller_JungleScene : MonoBehaviour {
 
+	//controls
     public float moveSpeed;
     public float jumpForce;
     public KeyCode left;
     public KeyCode right;
     public KeyCode jump;
-    public KeyCode shoot;
 
-    private Rigidbody2D theRB;
+	public Transform groundCheckPoint;
+	public bool isGrounded;
+	public float groundCheckRadius;
+	public LayerMask whatIsGround;
 
-    public Transform groundCheckPoint;
-    public bool isGrounded;
-    public float groundCheckRadius;
-    public LayerMask whatIsGround;
+	//UI
+	public Text livesText;
 
+	//player
+	private int lives = 3;
+	private Rigidbody2D theRB;
     //private Animator anim;
-
-    public GameObject rocket;
-    public Transform shootPoint;
-
-    public AudioSource shootSound;
 
 	// Use this for initialization
 	void Start () {
@@ -31,15 +31,9 @@ public class Player1Controller_JungleScene : MonoBehaviour {
 
         //anim = GetComponent<Animator>();
 	}
-
-
 	
 	// Update is called once per frame
 	void Update () {
-
-
-
-
         isGrounded = Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, whatIsGround);
 
         if (Input.GetKey(left))
@@ -60,15 +54,6 @@ public class Player1Controller_JungleScene : MonoBehaviour {
             theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
         }
 
-
-        if (Input.GetKeyDown(shoot))
-        {
-           GameObject ballClone = (GameObject) Instantiate(rocket, shootPoint.position, shootPoint.rotation);
-           ballClone.transform.localScale = transform.localScale;
-        //   anim.SetTrigger("Throw");
-            shootSound.Play();
-        }
-
         if(theRB.velocity.x < 0)
         {
             transform.localScale = new Vector3(-1, 1, 1);
@@ -79,5 +64,28 @@ public class Player1Controller_JungleScene : MonoBehaviour {
 
         //anim.SetFloat("Speed", Mathf.Abs(theRB.velocity.x ));
         //anim.SetBool("Grounded", isGrounded);
+	}
+
+	void OnTriggerEnter2D(Collider2D obj)
+	{
+		if (obj.CompareTag ("Meteor")) 
+		{
+			loseLife ();
+			Destroy (obj.gameObject);
+		}
+	}
+
+	private void loseLife()
+	{
+		if (lives <= 0) 
+		{
+			print ("Game over.");
+		}
+
+		else 
+		{
+			lives--;
+			livesText.text = ("P1 : " + lives);
+		}
 	}
 }

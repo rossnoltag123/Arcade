@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\DestroyOverTime.cs" />
+     <Compile Include="Assets\Scripts\JungleScene\JungleManager.cs" />
      <Compile Include="Assets\Scripts\JungleScene\Player1Controller_JungleScene.cs" />
      <Compile Include="Assets\Scripts\JungleScene\Player2Controller_JungleScene.cs" />
      <Compile Include="Assets\Scripts\Menu.cs" />
