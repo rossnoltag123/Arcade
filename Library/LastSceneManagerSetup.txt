@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/scene_5_Jungle.unity
+- path: Assets/Scenes/scene_4_GraveYard.unity
   isLoaded: 1
   isActive: 1

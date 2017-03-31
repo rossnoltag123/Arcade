@@ -23,12 +23,18 @@ public class Player1Controller_JungleScene : MonoBehaviour {
 	//player
 	private int lives = 3;
 	private Rigidbody2D theRB;
+	public JungleManager jungleManager;
+
+	//audio
+	public AudioSource audio;
+	public AudioClip jumpSound;
+	public AudioClip meteorSound;
+
     //private Animator anim;
 
 	// Use this for initialization
 	void Start () {
         theRB = GetComponent<Rigidbody2D>();
-
         //anim = GetComponent<Animator>();
 	}
 	
@@ -51,16 +57,17 @@ public class Player1Controller_JungleScene : MonoBehaviour {
 
         if (Input.GetKeyDown(jump) && isGrounded)
         {
+			audio.PlayOneShot(jumpSound);
             theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
         }
 
-        if(theRB.velocity.x < 0)
+ /*       if(theRB.velocity.x < 0)
         {
             transform.localScale = new Vector3(-1, 1, 1);
         }else if (theRB.velocity.x > 0)
         {
             transform.localScale = new Vector3(1, 1, 1);
-        }
+        }*/
 
         //anim.SetFloat("Speed", Mathf.Abs(theRB.velocity.x ));
         //anim.SetBool("Grounded", isGrounded);
@@ -70,6 +77,7 @@ public class Player1Controller_JungleScene : MonoBehaviour {
 	{
 		if (obj.CompareTag ("Meteor")) 
 		{
+			audio.PlayOneShot(meteorSound, 1f);
 			loseLife ();
 			Destroy (obj.gameObject);
 		}
@@ -77,9 +85,9 @@ public class Player1Controller_JungleScene : MonoBehaviour {
 
 	private void loseLife()
 	{
-		if (lives <= 0) 
+		if (lives <= 1) 
 		{
-			print ("Game over.");
+			jungleManager.gameOver (2);
 		}
 
 		else 

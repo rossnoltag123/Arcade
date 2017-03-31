@@ -21,17 +21,20 @@ public class Player2Controller_JungleScene : MonoBehaviour
 
 	private Rigidbody2D theRB;
 	private int lives = 3;
+	public JungleManager jungleManager;
+
     //private Animator anim;
 
-    
-    public AudioSource meteorSound;
+	//audio
+	public AudioSource audio;
+	public AudioClip jumpSound;
+    public AudioClip meteorSound;
 
     // Use this for initialization
     void Start()
     {
         theRB = GetComponent<Rigidbody2D>();
-
-        //anim = GetComponent<Animator>();
+		//anim = GetComponent<Animator>();
     }
 
 
@@ -58,6 +61,7 @@ public class Player2Controller_JungleScene : MonoBehaviour
         if (Input.GetKeyDown(jump) && isGrounded)
         {
             theRB.velocity = new Vector2(theRB.velocity.x, jumpForce);
+			audio.PlayOneShot (jumpSound, 1f);
         }
 
         if (theRB.velocity.x < 0)
@@ -77,16 +81,17 @@ public class Player2Controller_JungleScene : MonoBehaviour
 	{
 		if (obj.CompareTag ("Meteor")) 
 		{
-			loseLife ();
-			Destroy (obj.gameObject);
+			audio.PlayOneShot(meteorSound, 1f);
+			loseLife();
+			Destroy(obj.gameObject);
 		}
 	}
 
 	private void loseLife()
 	{
-		if (lives <= 0) 
+		if (lives <= 1) 
 		{
-			print ("Game over.");
+			jungleManager.gameOver(1);
 		}
 
 		else 
