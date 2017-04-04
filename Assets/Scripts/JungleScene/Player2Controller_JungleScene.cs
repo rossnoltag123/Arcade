@@ -64,7 +64,7 @@ public class Player2Controller_JungleScene : MonoBehaviour
 			audio.PlayOneShot (jumpSound, 1f);
         }
 
-        if (theRB.velocity.x < 0)
+/*        if (theRB.velocity.x < 0)
         {
             transform.localScale = new Vector3(-1, 1, 1);
         }
@@ -72,6 +72,7 @@ public class Player2Controller_JungleScene : MonoBehaviour
         {
             transform.localScale = new Vector3(1, 1, 1);
         }
+/*
 
         /*anim.SetFloat("Speed", Mathf.Abs(theRB.velocity.x));
         anim.SetBool("Grounded", isGrounded);*/
